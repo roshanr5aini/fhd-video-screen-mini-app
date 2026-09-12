@@ -2,10 +2,12 @@ import os, uuid, threading, traceback
 from pathlib import Path
 from flask import Flask, request, jsonify, send_file
 import cv2, numpy as np
+from flask_cors import CORS
 
 BASE=Path(__file__).resolve().parent
 UPLOAD=BASE/"jobs"; UPLOAD.mkdir(exist_ok=True)
 app=Flask(__name__)
+CORS(app, resources={r"/api/*": {"origins": "https://green-screen-app.onrender.com"}})
 
 jobs={}
 lock=threading.Lock()
